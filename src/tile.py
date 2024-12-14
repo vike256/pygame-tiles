@@ -4,7 +4,7 @@ from random import randint
 class Tile:
     def __init__(self):
         self.column = randint(0, 3)
-        self.y = 0
+        self.y = 0 - g.TILE_HEIGHT
         self.alive = True
 
     def update(self, dt, speed):

@@ -18,6 +18,8 @@ def main():
     tiles.append(Tile())
 
     speed = 250
+    tiles_on_screen = 1
+    points = 0
 
     while running:
         for event in pygame.event.get():
@@ -25,6 +27,9 @@ def main():
                 running = False
 
         screen.fill('#2B2B2B')
+
+        if len(tiles) < tiles_on_screen:
+            tiles.append(Tile())
 
         for tile in tiles:
             tile.update(dt, speed)
