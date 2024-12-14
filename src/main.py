@@ -9,6 +9,7 @@ def main():
     clock = pygame.time.Clock()
     running = True
     dt = 0
+    font = pygame.Font(None, 64)
 
     hit_surface = pygame.Surface((g.SCREEN_WIDTH, g.TILE_HEIGHT))
     hit_surface.set_alpha(128)
@@ -19,9 +20,11 @@ def main():
 
     speed = 250
     tiles_on_screen = 1
-    points = 0
+    POINTS_POS = (20, 20)
 
     while running:
+        keys = pygame.key.get_just_pressed()
+        print(keys)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -32,12 +35,15 @@ def main():
             tiles.append(Tile())
 
         for tile in tiles:
-            tile.update(dt, speed)
+            tile.update(dt, speed, keys)
             if not tile.alive:
                 tiles.remove(tile)
             pygame.draw.rect(screen, 'green', (g.COLUMNS[tile.column], tile.y, g.TILE_WIDTH, g.TILE_HEIGHT))
-        print(tiles)
+        #print(tiles)
 
+        points_text = font.render(str(g.points), True, 'white')
+
+        screen.blit(points_text, POINTS_POS)
         screen.blit(hit_surface, (0, g.HIT_POS))
         pygame.display.flip()
         dt = clock.tick(60) / 1000
