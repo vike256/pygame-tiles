@@ -18,13 +18,13 @@ def main():
     tiles = []
     tiles.append(Tile())
 
-    speed = 250
     tiles_on_screen = 1
-    POINTS_POS = (20, 20)
+    POINTS_POS = (16, 16)
+    HIGHSCORE_POS = (320, 16)
+    highscore = 0
 
     while running:
         keys = pygame.key.get_just_pressed()
-        print(keys)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -35,15 +35,28 @@ def main():
             tiles.append(Tile())
 
         for tile in tiles:
-            tile.update(dt, speed, keys)
+            tile.update(dt, keys)
             if not tile.alive:
                 tiles.remove(tile)
             pygame.draw.rect(screen, 'green', (g.COLUMNS[tile.column], tile.y, g.TILE_WIDTH, g.TILE_HEIGHT))
-        #print(tiles)
 
+        g.speed += dt * 2
+        print(g.speed)
+
+        if g.points > highscore:
+            highscore = g.points
+
+        if g.reset:
+            g.points = 0
+            g.speed = 400
+            g.reset = False
+
+        # Render
         points_text = font.render(str(g.points), True, 'white')
+        highscore_text = font.render(str(highscore), True, 'red')
 
         screen.blit(points_text, POINTS_POS)
+        screen.blit(highscore_text, HIGHSCORE_POS)
         screen.blit(hit_surface, (0, g.HIT_POS))
         pygame.display.flip()
         dt = clock.tick(60) / 1000

@@ -10,13 +10,16 @@ class Tile:
         self.y = 0 - g.TILE_HEIGHT
         self.alive = True
 
-    def update(self, dt, speed, keys):
-        self.y += speed * dt
+    def update(self, dt, keys):        
+        self.y += g.speed * dt
         if self.y > g.SCREEN_HEIGHT:
+            g.reset = True
             self.alive = False
     
         if keys[COLUMN_KEYS[self.column]]:
-            print('pressed')
-            if abs(self.y - g.HIT_POS) <= 25:
+            if 50 < abs(self.y - g.HIT_POS) <= 100:
+                g.reset = True
+                self.alive = False
+            elif abs(self.y - g.HIT_POS) <= 50:
                 g.points += 1
                 self.alive = False
