@@ -1,11 +1,12 @@
 SCREEN_WIDTH = 432
-SCREEN_HEIGHT = 768
+SCREEN_HEIGHT = 432
 TILE_WIDTH = SCREEN_WIDTH // 4
 TILE_HEIGHT = TILE_WIDTH // 2
 HIT_POS = SCREEN_HEIGHT - TILE_HEIGHT * 2
 COLUMNS = (0, 0 + TILE_WIDTH, 0 + TILE_WIDTH * 2, 0 + TILE_WIDTH * 3)
+START_SPEED = 750
 
-speed = 400
+speed = START_SPEED
 points = 0
 column_available = [True, True, True, True]
 reset = False

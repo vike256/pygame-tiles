@@ -17,9 +17,9 @@ class Tile:
             self.alive = False
     
         if keys[COLUMN_KEYS[self.column]]:
-            if 50 < abs(self.y - g.HIT_POS) <= 100:
-                g.reset = True
-                self.alive = False
-            elif abs(self.y - g.HIT_POS) <= 50:
+            if abs(self.y - g.HIT_POS) <= g.TILE_HEIGHT:
                 g.points += 1
+                self.alive = False
+            elif abs(self.y - g.HIT_POS) <= g.TILE_HEIGHT * 2:
+                g.reset = True
                 self.alive = False

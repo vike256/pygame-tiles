@@ -40,7 +40,7 @@ def main():
                 tiles.remove(tile)
             pygame.draw.rect(screen, 'green', (g.COLUMNS[tile.column], tile.y, g.TILE_WIDTH, g.TILE_HEIGHT))
 
-        g.speed += dt * 2
+        g.speed += dt * 4
         print(g.speed)
 
         if g.points > highscore:
@@ -48,7 +48,7 @@ def main():
 
         if g.reset:
             g.points = 0
-            g.speed = 400
+            g.speed = g.START_SPEED
             g.reset = False
 
         # Render
